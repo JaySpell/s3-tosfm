@@ -24,7 +24,7 @@ This is a terraform AWS module that provides an object store for messaging.  Thi
         description = "ARN of the queue"
         value = module.aws-s3-tosfm.tosfm-notification-queue
     }
-'''
+```
 
 ## Options
 
