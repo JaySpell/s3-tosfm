@@ -1,3 +1,6 @@
+#Creates a Typical Object Store For Messaging (TOSFM)
+#Event notification via SNS or SQS - defaults to SNS
+
 #Template provides an S3 bucket used for messaging 
 provider "aws" {
   profile = "default"
@@ -24,9 +27,8 @@ variable "tosfm-access-arn" {
 variable "tosfm-s3-allow-public-access" {
   description = "Block public access for bucket"
   type = bool  
-  default = false
+  default = true
 }
-
 
 resource "random_id" "tosfm-id" {
 	  byte_length = 8
@@ -81,7 +83,7 @@ resource "aws_s3_bucket_public_access_block" "tosfm-block-public-access" {
 #S3 Bucket SQS Notification
 resource "aws_sqs_queue" "s3-tosfm-sqs" {
   count = var.tosfm-create-sqs-queue ? 1 : 0
-  name = "${random_id.tosfm-id.hex}-event-notification-queue"
+  name = "tosfm-${random_id.tosfm-id.hex}-event-notification-queue"
   policy = <<POLICY
         {
             "Version": "2012-10-17",
@@ -106,7 +108,6 @@ resource "aws_s3_bucket_notification" "sqs_queue_tosfm" {
   queue {
     queue_arn     = aws_sqs_queue.s3-tosfm-sqs[0].arn
     events        = ["s3:ObjectCreated:*"]
-    filter_suffix = ".log"
   }
 }
 
