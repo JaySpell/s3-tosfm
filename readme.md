@@ -1,8 +1,8 @@
 # Terraform AWS TOSFM - Typical Object Store For Messaging
-This is a terraform AWS module that provides an object store for messaging.  This will create a S3 bucket using either a SNS or SQS queue for event notification.  The default is SNS - SQS turned on by sending *tosfm-create-sqs-queue = true*
+This is a terraform AWS module that provides an object store for messaging.  This will create a S3 bucket using either a SNS or SQS queue for event notification.  The default is SNS - SQS turned on by sending `tosfm-create-sqs-queue = true
 
 ## Usage
-''' 
+```json
     provider "aws" {
         profile = "default"
         region  = us-east-2
