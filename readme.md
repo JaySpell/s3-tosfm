@@ -9,7 +9,7 @@ This is a terraform AWS module that provides an object store for messaging.  Thi
     }
 
     module "aws-s3-tosfm" {
-        source = "../modules/s3-tosfm"
+        source = "git::https://github.com/JaySpell/s3-tosfm"
         tosfm-aws-region = "us-east-2"
         tosfm-access-arn = **ROLE_ARN_FOR_ACCESS**
         tosfm-create-sqs-queue = true
