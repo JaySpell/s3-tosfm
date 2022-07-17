@@ -58,7 +58,8 @@ resource "aws_s3_bucket_policy" "s3-tosfm-policy" {
           "Action": [
             "s3:PutObject",
             "s3:ListBucket",
-            "s3:GetObject"
+            "s3:GetObject",
+            "s3:DeleteObject"
           ],
           "Resource": [
             "${aws_s3_bucket.s3-tosfm.arn}",
@@ -79,6 +80,7 @@ resource "aws_s3_bucket_public_access_block" "tosfm-block-public-access" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
 
 #S3 Bucket SQS Notification
 resource "aws_sqs_queue" "s3-tosfm-sqs" {
